@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 
 namespace PCPartsAppAPI.Models
 {
-    public class Category
+    public class Parameter
     {
         public int Id { get; set; }
+        public int ProductId { get; set; }
+        public Product Product { get; set; }
         public string Name { get; set; }
-        public IEnumerable<Product> Products { get; set; } = new List<Product>();
+        public string Value { get; set; }
     }
 }
