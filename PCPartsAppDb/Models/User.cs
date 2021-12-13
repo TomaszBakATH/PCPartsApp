@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace PCPartsAppAPI.Models
@@ -9,6 +10,7 @@ namespace PCPartsAppAPI.Models
     {
         public int Id { get; set; }
         public string Email { get; set; }
+        [JsonIgnore]
         public string Password { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
@@ -16,6 +18,6 @@ namespace PCPartsAppAPI.Models
         public string City { get; set; }
         public IEnumerable<Announcement> Announcements { get; set; } = new List<Announcement>();
         public DateTime Birthdate { get; set; }
-        public DateTime JoinDate { get; set; }
+        public DateTime JoinDate { get; set; } = DateTime.Now;
     }
 }
