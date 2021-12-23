@@ -77,18 +77,12 @@ namespace PCPartsAppAPI.Controllers
         [HttpGet("user")]
         public IActionResult UserCheck()
         {
-            try
+            var user = Check();
+            if(user != null)
             {
-                var jwt = Request.Cookies["jwt"];
-
-                var token = _jwtService.Verify(jwt);
-
-                int userId = int.Parse(token.Issuer);
-
-                var user = _userRepository.GetById(userId);
-
                 return Ok(user);
-            }catch(Exception e)
+            }
+            else
             {
                 return Unauthorized();
             }
@@ -102,6 +96,26 @@ namespace PCPartsAppAPI.Controllers
             return Ok(new{
                 message = "success"
             });
+        }
+
+        User Check()
+        {
+            try
+            {
+                var jwt = Request.Cookies["jwt"];
+
+                var token = _jwtService.Verify(jwt);
+
+                int userId = int.Parse(token.Issuer);
+
+                var user = _userRepository.GetById(userId);
+
+                return user;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
     }
 }
