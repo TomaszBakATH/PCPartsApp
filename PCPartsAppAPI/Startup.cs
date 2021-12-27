@@ -14,6 +14,8 @@ using PCPartsAppDb.Context;
 using Microsoft.EntityFrameworkCore;
 using PCPartsAppDb.Repos;
 using PCPartsAppAPI.Helpers;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace PCPartsAppAPI
 {
@@ -33,7 +35,12 @@ namespace PCPartsAppAPI
             services.AddDbContext<PcPartsContext>(o => o.UseSqlServer(Configuration.GetConnectionString("dev")));
             services.AddControllers();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IAnnouncementRepository, AnnouncementRepository>();
             services.AddScoped<JwtService>();
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,8 +50,13 @@ namespace PCPartsAppAPI
             {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseHttpsRedirection();
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "Images")),
+                RequestPath = "/Images"
+            });
 
             app.UseRouting();
 

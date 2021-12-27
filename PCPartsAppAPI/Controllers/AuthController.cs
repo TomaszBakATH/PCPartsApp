@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace PCPartsAppAPI.Controllers
 {
-    [Route("api")]
+    [Route("api/[controller]")]
     [ApiController]
     public class AuthController : Controller
     {
@@ -38,7 +38,7 @@ namespace PCPartsAppAPI.Controllers
                 Name=dto.Name,
                 LastName = dto.LastName,
                 Nickname = dto.Nickname,
-                Birthdate = dto.Birthdate,
+                Birthdate = DateTime.Now,
                 Password = BCrypt.Net.BCrypt.HashPassword(dto.Password)
             };
 
@@ -70,10 +70,11 @@ namespace PCPartsAppAPI.Controllers
 
             return Ok(new
             {
+                name = user.Name,
                 message = "success"
             });
         }
-
+       
         [HttpGet("user")]
         public IActionResult UserCheck()
         {

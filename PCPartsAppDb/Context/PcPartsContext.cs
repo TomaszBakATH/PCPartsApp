@@ -27,6 +27,5 @@ namespace PCPartsAppDb.Context
         {
             modelBuilder.Entity<User>(enity => { enity.HasIndex(e => e.Email).IsUnique(); });
         }
-        
     }
 }

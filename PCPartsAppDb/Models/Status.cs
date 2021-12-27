@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace PCPartsAppDb
 {
+    public enum Statuses
+    {
+        Open,
+        Closed,
+        Removed
+    }
     public class Status
     {
         public int Id { get; set; }
