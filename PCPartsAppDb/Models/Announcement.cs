@@ -1,4 +1,5 @@
 ﻿using PCPartsAppDb;
+using PCPartsAppDb.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace PCPartsAppAPI.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public IEnumerable<Product> Product { get; set; }
+        public IEnumerable<ImagePath> ImagePath { get; set; }
         public string Description { get; set; }
         public int OwnerId { get; set; }
         public virtual User Owner { get; set; }

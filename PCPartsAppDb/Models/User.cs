@@ -19,5 +19,6 @@ namespace PCPartsAppAPI.Models
         public IEnumerable<Announcement> Announcements { get; set; } = new List<Announcement>();
         public DateTime Birthdate { get; set; }
         public DateTime JoinDate { get; set; } = DateTime.Now;
+        public string ImagePath { get; set; }
     }
 }

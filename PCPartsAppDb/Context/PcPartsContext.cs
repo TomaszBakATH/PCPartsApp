@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PCPartsAppAPI.Models;
+using PCPartsAppDb.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace PCPartsAppDb.Context
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Parameter> Parameters { get; set; }
+        public DbSet<ImagePath> ImagePaths { get; set; }
 
         public PcPartsContext(DbContextOptions<PcPartsContext> options) : base(options)
         {
