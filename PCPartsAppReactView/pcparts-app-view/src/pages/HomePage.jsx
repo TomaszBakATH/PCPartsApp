@@ -5,7 +5,7 @@ const Home = (props) => {
     const {name} = props;
     return (
         <div>
-            {name? "Hi " + name.toString(): "chuj"}
+            {name? "witaj " + name.toString(): "unknow"}
         </div>
     );
 }

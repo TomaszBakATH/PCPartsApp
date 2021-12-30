@@ -5,7 +5,7 @@ const Navigation = (props) => {
     let menu;
     
     const logout = async () => {
-        await fetch('https://localhost:44321/api/logout', {
+        await fetch('https://localhost:44321/api/auth/logout', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             credentials: 'include'
