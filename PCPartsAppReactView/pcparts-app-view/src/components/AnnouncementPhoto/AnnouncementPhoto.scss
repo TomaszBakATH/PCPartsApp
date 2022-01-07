@@ -1,0 +1,41 @@
+@import 'src/styles/variables';
+
+.announcement-photo {
+
+  justify-content: center;
+  //width: 75%;
+  padding: 20px;
+
+  &--mobile {
+    display: none;
+    @media #{$mobile} {
+      display: flex;
+    }
+  }
+
+  &--desktop {
+    display: flex;
+    @media #{$mobile} {
+      display: none;
+    }
+  }
+
+  &_wrapper {
+    @include gradient-background;
+    //background: $base-gray;
+    box-shadow:  $dark-orange 20px 20px;
+
+    @media #{$mobile} {
+      box-shadow: none;
+    }
+  }
+
+  &_image {
+    max-height: 650px;
+    object-fit: contain;
+  }
+
+  &_image-wrapper {
+    margin: auto;
+  }
+}

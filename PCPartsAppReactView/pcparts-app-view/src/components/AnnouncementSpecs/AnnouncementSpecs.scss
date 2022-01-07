@@ -1,0 +1,30 @@
+@import 'src/styles/variables';
+
+.announcement-specs {
+  width: 100%;
+  &_wrapper {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  &_spec {
+    margin: 0 10px 0 10px;
+  }
+
+  hr {
+    color: $base-gray;
+    height: 2px;
+    position: relative;
+    opacity: 1;
+  }
+
+  hr::after {
+    content: "";
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    width: 2px;
+    height: 72px;
+    background: $dark-orange;
+  }
+}

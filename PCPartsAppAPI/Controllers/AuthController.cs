@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PCPartsAppAPI.Dtos;
 using PCPartsAppAPI.Helpers;
@@ -7,6 +8,7 @@ using PCPartsAppDb.Context;
 using PCPartsAppDb.Repos;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -20,16 +22,18 @@ namespace PCPartsAppAPI.Controllers
         private static PcPartsContext _context;
         private readonly IUserRepository _userRepository;
         private readonly JwtService _jwtService;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
-        public AuthController(PcPartsContext context, IUserRepository userRepository, JwtService jwtService)
+        public AuthController(PcPartsContext context, IUserRepository userRepository, JwtService jwtService, IWebHostEnvironment hostEnvironment)
         {
             _context = context;
             _userRepository = userRepository;
             _jwtService = jwtService;
+            _hostEnvironment = hostEnvironment;
         }
 
         [HttpPost("register")]
-        public IActionResult Register(RegisterDto dto)
+        public async Task<IActionResult> Register([FromForm] RegisterDto dto)
         {
             var user = new User
             {
@@ -39,10 +43,10 @@ namespace PCPartsAppAPI.Controllers
                 LastName = dto.LastName,
                 Nickname = dto.Nickname,
                 Birthdate = DateTime.Now,
-                Password = BCrypt.Net.BCrypt.HashPassword(dto.Password)
+                Password = BCrypt.Net.BCrypt.HashPassword(dto.Password),
+                ImagePath = await SaveImage(dto.Image)
             };
 
-            
             return Created("success", _userRepository.Create(user));
         }
 
@@ -117,6 +121,18 @@ namespace PCPartsAppAPI.Controllers
             {
                 return null;
             }
+        }
+        public async Task<string> SaveImage(IFormFile imageFile)
+        {
+            string imageName = new String(Path.GetFileNameWithoutExtension(imageFile.FileName).Take(10).ToArray()).Replace(' ', '-');
+            imageName += DateTime.Now.ToString("yymssfff") + Path.GetExtension(imageFile.FileName);
+            var imagePath = Path.Combine(_hostEnvironment.ContentRootPath, "Images", imageName);
+
+            using (var fileStream = new FileStream(imagePath, FileMode.Create))
+            {
+                await imageFile.CopyToAsync(fileStream);
+            }
+            return imageName;
         }
     }
 }

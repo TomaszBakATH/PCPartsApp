@@ -1,0 +1,13 @@
+.homepage-banner {
+  background-image: url("http://localhost:3000/homepage-background.jpg");
+  background-position: center center;
+  background-attachment: fixed;
+  height: 30vh;
+  width: 100%;
+
+  &_image {
+    height: 30vh;
+    width: 100%;
+    object-fit: cover;
+  }
+}

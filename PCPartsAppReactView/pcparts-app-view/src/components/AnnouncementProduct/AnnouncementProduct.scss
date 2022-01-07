@@ -1,0 +1,14 @@
+@import 'src/styles/variables';
+
+.announcement-product {
+  margin: auto;
+  padding: 50px 100px;
+  max-width: 1700px;
+
+  hr {
+    color: $base-gray;
+    height: 2px;
+    position: relative;
+    opacity: 1;
+  }
+}

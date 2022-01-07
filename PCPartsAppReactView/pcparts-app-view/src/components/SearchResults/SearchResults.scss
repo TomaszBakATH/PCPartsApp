@@ -1,0 +1,11 @@
+.search-results {
+  padding: 50px 100px;
+  margin: auto;
+  max-width: 1700px;
+
+  &_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}

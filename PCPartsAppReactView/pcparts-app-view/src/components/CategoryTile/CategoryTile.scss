@@ -1,0 +1,28 @@
+@import 'src/styles/variables';
+
+.category-tile {
+  display: flex;
+  flex-direction: column;
+  margin: 0 55px 100px 0;
+  align-items: center;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &_reversed {
+    margin: 100px 55px 0 0;
+  }
+
+  &_image {
+    object-fit: cover;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 30px;
+    box-shadow: white 5px -5px ,white -5px 5px , $dark-gray -10px 10px, $dark-orange 10px -10px;
+  }
+
+  h3 {
+    font-size: 15px;
+  }
+}

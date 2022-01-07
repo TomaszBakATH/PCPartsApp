@@ -1,0 +1,72 @@
+@import 'src/styles/variables';
+
+.announcement-tile {
+  margin-right: 70px;
+  position: relative;
+  //box-shadow:  $dark-gray -20px 20px;
+  box-shadow: white -5px -130px,$dark-gray -10px 20px;;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &--search{
+  margin: 30px 70px 30px 0;
+  }
+
+  &_image {
+    height: 480px;
+    width: 300px;
+    object-fit: cover;
+    box-shadow: white 5px -5px, $dark-orange 10px -10px;
+  }
+
+  &_no-image {
+    height: 480px;
+    width: 300px;
+    object-fit: cover;
+    box-shadow: white 5px -5px, $dark-orange 10px -10px;
+    border: 1px solid $dark-gray
+  }
+
+  &_content {
+    background: $dark-gray;
+    @include gradient-background;
+    position: absolute;
+    left: 0;
+    bottom: -20px;
+    width: 300px;
+    height: 150px;
+    padding: 20px;
+    color: white;
+    z-index: 10;
+
+    &::before {
+      content: "";
+      position: absolute;
+      background: #0c2d48;
+      width: 5px;
+      height: 90px;
+      top: 60px;
+      left: -5px;
+    }
+
+    p {
+      font-size: 30px;
+      text-align: right;
+    }
+  }
+
+  &_date-wrapper {
+    display: flex;
+    justify-content: space-between;
+
+    p {
+      max-width: 100px;
+    }
+
+    h5 {
+      max-width: 100px;
+    }
+  }
+}

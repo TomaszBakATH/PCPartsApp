@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PCPartsAppAPI.Dtos;
 using PCPartsAppAPI.Helpers;
 using PCPartsAppAPI.Models;
@@ -25,7 +26,12 @@ namespace PCPartsAppAPI.Controllers
         private readonly JwtService _jwtService;
         private readonly IWebHostEnvironment _hostEnvironment;
 
-        public AnnouncementController(PcPartsContext context, IAnnouncementRepository announcementRepository, IUserRepository userRepository, JwtService jwtService, IWebHostEnvironment hostEnvironment)
+        public AnnouncementController(
+            PcPartsContext context,
+            IAnnouncementRepository announcementRepository,
+            IUserRepository userRepository,
+            JwtService jwtService,
+            IWebHostEnvironment hostEnvironment)
         {
             _context = context;
             _announcementRepository = announcementRepository;
@@ -45,6 +51,17 @@ namespace PCPartsAppAPI.Controllers
             });
         }
 
+        [HttpGet("GetUser/{id}")]
+        public IActionResult GetUser(int id)
+        {
+            var user = _context.Users.Include(x=>x.Announcements).ThenInclude(x=>x.ImagePath).FirstOrDefault(x => x.Id == id);
+
+            return Ok(new
+            {
+                user = user
+            });
+        }
+
         [HttpGet("UserAnnouncements/{id}")]
         public IActionResult GetByOwnerId(int id)
         {
@@ -57,11 +74,9 @@ namespace PCPartsAppAPI.Controllers
         }
 
         [HttpPost("AddAnnouncement")]
-        public IActionResult AddAnnouncement(AnnouncementDto announcementDto)
+        public IActionResult AddAnnouncement( AnnouncementDto announcementDto)
         {
-            var user = Check();
-            if (user != null)
-            {
+            var user = _userRepository.GetById(announcementDto.OwnerId);
                 var announcement = new Announcement
                 {
                     AddDate = DateTime.Now,
@@ -73,34 +88,44 @@ namespace PCPartsAppAPI.Controllers
                     Title = announcementDto.Title
                 };
                
-                return Ok(new
+                
+            return Ok(new
                 {
                     announcement = _announcementRepository.AddAnnouncement(announcement)
                 });
-            }
-            else
-            {
-                return Unauthorized();
-            }
         }
 
-        [HttpPost("CloseAnnouncement/{id}")]
-        public IActionResult CloseAnnouncement(int id)
+        [HttpPost("AddPhotos")]
+        public async Task<IActionResult> AddPhotos([FromForm]PhotosDto photosDto)
         {
-            var user = Check();
-            if (_announcementRepository.IsOwner(user, id))
+            if(photosDto.ImagePaths.Length != 0 && photosDto.AnnouncementId>1)
             {
-                _announcementRepository.CloseAnnouncement(id);
-
-                return Ok(new
+                var paths = new List<string>();
+                foreach (var item in photosDto.ImagePaths)
                 {
-                    message = "success"
-                });
+                    var i = await SaveImage(item);
+                    paths.Add(i);
+                }
+                _announcementRepository.AddPhoto(photosDto.AnnouncementId, paths);
+
+                return Ok();
             }
             else
             {
                 return BadRequest();
             }
+            
+        }
+
+        [HttpPost("CloseAnnouncement/{id}")]
+        public IActionResult CloseAnnouncement(int id)
+        {
+            _announcementRepository.CloseAnnouncement(id);
+
+            return Ok(new
+            {
+                message = "success"
+            });
         }
 
         [HttpPost("EditAnnouncement")]
@@ -120,12 +145,12 @@ namespace PCPartsAppAPI.Controllers
                 return BadRequest();
             }
         }
-        [HttpGet("Search/{querry}")]
-        public IActionResult Search(string querry)
+        [HttpPost("Search")]
+        public IActionResult Search(SearchDto searchDto)
         {
             return Ok(new
             {
-                announcements = _announcementRepository.SearchAnnouncements(querry)
+                announcements = _announcementRepository.SearchAnnouncements(searchDto.Querry, searchDto.IsSet, searchDto.Category, searchDto.MaxPrice,searchDto.City, searchDto.MinPrice)
             });
         }
 
@@ -135,6 +160,14 @@ namespace PCPartsAppAPI.Controllers
             return Ok(new
             {
                 announcements = _announcementRepository.GetAnnouncements(amount)
+            });
+        }
+        [HttpGet("GetCategories")]
+        public IActionResult GetCategories()
+        {
+            return Ok(new
+            {
+                categories = _announcementRepository.GetCategories()
             });
         }
 
@@ -157,7 +190,6 @@ namespace PCPartsAppAPI.Controllers
                 return null;
             }
         }
-
         public async Task<string> SaveImage(IFormFile imageFile)
         {
             string imageName = new String(Path.GetFileNameWithoutExtension(imageFile.FileName).Take(10).ToArray()).Replace(' ', '-');

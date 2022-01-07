@@ -1,0 +1,23 @@
+@import 'src/styles/variables';
+
+.user-info {
+  margin: 50px auto;
+  max-width: 700px;
+  width: 80%;
+  padding: 50px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: $dark-gray -20px 20px, $dark-orange 20px -20px;
+
+  &_image {
+    border: 2px solid $dark-orange;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    background: white;
+  }
+}

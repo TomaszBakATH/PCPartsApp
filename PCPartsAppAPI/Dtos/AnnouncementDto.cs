@@ -1,4 +1,5 @@
-﻿using PCPartsAppAPI.Models;
+﻿using Microsoft.AspNetCore.Http;
+using PCPartsAppAPI.Models;
 using PCPartsAppDb;
 using System;
 using System.Collections.Generic;
@@ -18,5 +19,6 @@ namespace PCPartsAppAPI.Dtos
         public DateTime AddDate { get; set; }
         public int StatusId { get; set; }
         public virtual Status Status { get; set; }
+        public IEnumerable<IFormFile> Images { get; set; }
     }
 }

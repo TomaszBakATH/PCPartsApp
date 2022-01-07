@@ -1,0 +1,84 @@
+@import 'src/styles/variables';
+
+.announcement-owner-info {
+  margin: 100px 0 0 50px;
+  @include gradient-background;
+  //background: $base-gray;
+  padding: 25px;
+  width: 450px;
+  flex-shrink: 0;
+  overflow: hidden;
+  overflow-y: scroll;
+  position: relative;
+
+  @media #{$mobile} {
+    margin: 100px 0 0 0;
+  }
+
+  &_close-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  &_user-wrapper {
+    display: flex;
+    flex-direction: row;
+    color: white;
+    text-decoration: none;
+  }
+
+  &_user-image {
+    border: 2px solid $dark-orange;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    background: white;
+  }
+
+  &_user-name {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-left: 25px;
+
+    h3 {
+      color: white;
+      font-size: 20px;
+      text-decoration: none;
+    }
+    a:hover {
+      color: white;
+      text-decoration: none;
+    }
+  }
+
+  &_button {
+    background: $light-orange;
+    width: 100%;
+    height: 40px;
+    color: $base-gray;
+    font-size: 20px;
+    margin-top: 25px;
+    text-align: center;
+    border: 2px solid $dark-gray;
+  }
+
+  &_city {
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  &_product-wrapper {
+    margin-top: 30px;
+    color: white;
+    margin-bottom: 25px;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}

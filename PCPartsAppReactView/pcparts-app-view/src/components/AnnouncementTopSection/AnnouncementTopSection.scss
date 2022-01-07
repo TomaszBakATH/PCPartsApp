@@ -1,0 +1,16 @@
+@import 'src/styles/variables';
+
+
+.announcement-top-section {
+  max-width: 1700px;
+  padding:  0 100px 0 100px;
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  max-height: 800px;
+
+  @media #{$mobile} {
+    max-height: 2000px;
+    justify-content: center;
+  }
+}

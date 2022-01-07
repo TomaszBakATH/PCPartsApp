@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "@reach/router"
 import dateFormat from "dateformat";
 
 const Login = (props) => {
@@ -12,7 +12,7 @@ const Login = (props) => {
 
     const submit = async (e) => {
         e.preventDefault();
-        const submit = await fetch('https://localhost:44321/api/login', {
+        const submit = await fetch('https://localhost:44321/api/auth/login', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             credentials: 'include',
@@ -35,7 +35,7 @@ const Login = (props) => {
     }
 
     return (
-        <form>
+        <form className='announcement-form'>
             <h1 className="h3 mb-3 fw-normal">Please login</h1>
 
             {validated? <p>invalid credentials</p>:<></>}

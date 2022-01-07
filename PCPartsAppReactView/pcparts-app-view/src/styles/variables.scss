@@ -1,4 +1,22 @@
 
-$base-gray: #323232;
-$light-orange:f68201;
-$dark-orange:f68201;
+//$dark-gray:#171717;
+//$base-gray: #323232;
+//$light-orange:#f68201;
+//$dark-orange:#c25000;
+//$light_gray:#bababa;
+$gray: rgba(11,52,89,1);
+$dark-gray:#0c2d48;
+$base-gray: #145da0;
+$light-orange:#b1d4e0;
+$dark-orange:#2e8bc0;
+$light_gray:#d18d96;
+
+@mixin gradient-background {
+  background: linear-gradient(90deg, $dark-gray 5%, $gray 47%, $dark-gray 100%);
+}
+
+$mobile: "(max-width: 1000px)";
+$mobile-sx: "(max-width: 550px)";
+
+
+

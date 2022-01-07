@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,5 +15,6 @@ namespace PCPartsAppAPI.Dtos
         public string Nickname { get; set; }
         public string City { get; set; }
         public DateTime Birthdate { get; set; }
+        public IFormFile Image { get; set; }
     }
 }

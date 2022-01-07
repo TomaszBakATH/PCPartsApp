@@ -1,0 +1,54 @@
+@import 'src/styles/variables';
+
+.searchbar {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  max-width: 1700px;
+  margin: auto;
+  padding: 50px 100px;
+
+  @media #{$mobile-sx} {
+    padding: 50px;
+  }
+
+  button {
+    background: $light-orange;
+    height: 40px;
+    width: 100px;
+    color: $base-gray;
+    font-size: 20px;
+    text-align: center;
+    border: 2px solid $dark-gray;
+  }
+
+  input {
+    margin-left: 20px;
+    width: 200px;
+    height: 40px;
+
+    @media #{$mobile-sx} {
+      width: 100%;
+      margin: 20px 0;
+    }
+  }
+
+  h2{
+    margin-bottom: 30px;
+  }
+
+  &_top {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    @media #{$mobile} {
+      flex-direction: column;
+    }
+  }
+
+  &_checkbox {
+    width: 40px;
+    height: 40px;
+  }
+}

@@ -1,0 +1,18 @@
+.closed-modal {
+  position: fixed;
+  width: 99vw;
+  height: 150%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  top: -100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  h1 {
+    font-size: 50px;
+    text-align: center;
+    z-index: 1001;
+    color:white;
+  }
+}

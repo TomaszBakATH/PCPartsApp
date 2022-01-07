@@ -1,0 +1,18 @@
+@import 'src/styles/variables';
+
+.proposed-announcements {
+  max-width: 1700px;
+  margin:auto;
+  padding: 50px 100px 50px 100px;
+  //background: $light-gray;
+
+  @media #{$mobile-sx} {
+    padding: 50px;
+  }
+
+  &_wrapper {
+    display: flex;
+    overflow-x: auto;
+    padding: 50px 20px;
+  }
+}
