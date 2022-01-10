@@ -1,11 +1,22 @@
+@import 'src/styles/variables';
+
+
 .search-results {
   padding: 50px 100px;
   margin: auto;
   max-width: 1700px;
 
+  &_text {
+    margin-bottom: 100px;
+  }
+
   &_wrapper {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+
+    @media #{$mobile} {
+      justify-content: center;
+    }
   }
 }

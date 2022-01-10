@@ -46,7 +46,7 @@ const AnnouncementForm = (props) => {
 
     const submit = async (e) => {
         e.preventDefault();
-        let dupa = 0;
+        let indexx = 0;
        await axios
             .post("https://localhost:44321/api/announcement/AddAnnouncement",
                 {
@@ -57,13 +57,13 @@ const AnnouncementForm = (props) => {
                 })
             .then(function (response) {
                 // handle success
-                console.log("response id",response.data.announcement.product[0].announcementId);
+
                 //setAnnouncementId(response.data.announcement.id)
-                dupa = response.data.announcement.product[0].announcementId;
-                console.log("ID",dupa)
+                indexx = response.data.announcement.product[0].announcementId;
+
 
                 let formData = new FormData();
-                formData.append('announcementId',dupa.toString())
+                formData.append('announcementId',indexx.toString())
                 for (let i = 0; i < images.length; i++) {
                     formData.append('imagePaths',images[i])
                 }
@@ -71,7 +71,7 @@ const AnnouncementForm = (props) => {
                 axios
                     .post("https://localhost:44321/api/announcement/AddPhotos", formData)
                     .then((res) => {
-                        navigate("/announcement/"+dupa.toString())
+                        navigate("/announcement/"+indexx.toString())
                     }).catch((err) => alert("File Upload Error"));
             })
             .catch((err) => {
@@ -118,7 +118,7 @@ const AnnouncementForm = (props) => {
     return (
         <div className='announcement-form'>
             <form>
-                <h1 className="h3 mb-3 fw-normal">Please register</h1>
+                <h1 className="h3 mb-3 fw-normal">Dodaj ogłoszenie</h1>
 
                 <div className="form-floating">
                     <input type="text" className="form-control" onChange={e => setTitle(e.target.value)}/>
@@ -146,17 +146,18 @@ const AnnouncementForm = (props) => {
                                         params.map((_,index)=>{
                                             return <div>
                                                 <div className="form-floating">
+                                                    <p >nazwa</p>
                                                     <input type="text" className="form-control"
                                                            onChange={event => addParam(partIndex,index,event.target.value,null)}/>
-                                                    <label htmlFor="floatingInput">nazwa</label>
+                                                    <p>wartość</p>
                                                     <input type="text" className="form-control"
                                                            onChange={event => addParam(partIndex,index,null,event.target.value)}/>
-                                                    <label htmlFor="floatingInput">wartosc</label>
+                                                    <hr/>
                                                 </div>
                                             </div>
                                         })
                                     }
-                                    <button className='btn' onClick={e=>createParam(e,index)}>dodaj parametr</button>
+                                    <button className='btn btn-secondary' onClick={e=>createParam(e,index)}>dodaj parametr</button>
                                 </div>
                                 <hr/>
                             </div>
@@ -167,11 +168,11 @@ const AnnouncementForm = (props) => {
                 <div className="form-floating">
                     <input multiple type="file" accept="image/*" className="form-control-file"
                            onChange={e => {setImages(e.target.files);
-                               console.log("files",e.target.files)}}/>
+                               }}/>
                 </div>
 
 
-                <button className="w-100 btn btn-lg btn-primary" type="submit" onClick={submit}>Submit</button>
+                <button className="w-100 btn btn-lg btn-dark" type="submit" onClick={submit}>Submit</button>
 
             </form>
         </div>

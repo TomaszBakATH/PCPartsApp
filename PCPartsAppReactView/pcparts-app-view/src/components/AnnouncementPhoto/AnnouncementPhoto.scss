@@ -15,8 +15,12 @@
 
   &--desktop {
     display: flex;
+    padding-top: 100px;
+    width: 50%;
+    min-height: 900px;
     @media #{$mobile} {
       display: none;
+      padding-top: unset;
     }
   }
 
@@ -24,9 +28,11 @@
     @include gradient-background;
     //background: $base-gray;
     box-shadow:  $dark-orange 20px 20px;
-
+    padding-top: 100px;
+    width: 100%;
     @media #{$mobile} {
       box-shadow: none;
+      padding-top: unset;
     }
   }
 

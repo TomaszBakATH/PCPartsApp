@@ -62,6 +62,65 @@ namespace PCPartsAppAPI.Controllers
             });
         }
 
+        [HttpGet("GetQuestions/{id}")]
+        public IActionResult GetQuestions(int id)
+        {
+            return Ok(new
+            {
+                questions = _announcementRepository.GetQuestions(id)
+            });
+        }
+
+        [HttpPost("AddQuestion")]
+        public IActionResult AddQuestion(QuestionDto questionDto)
+        {
+            var q = new Question
+            {
+                CreateDate = DateTime.Now,
+                Content= questionDto.Content,             
+            };
+
+            return Ok(new
+            {
+                question = _announcementRepository.AddQuestion(q,questionDto.QuestionerId,questionDto.AnnouncementId)
+            });
+        }
+
+        [HttpPost("DeleteQuestion/{id}")]
+        public IActionResult DeleteQuestion(int id )
+        {
+            _announcementRepository.DeleteQuestion(id);
+            return Ok(new
+            {
+                message = "success"
+            });
+        }
+
+        [HttpPost("AddAnswer")]
+        public IActionResult AddAnswer(AnswerDto answerDto)
+        {
+            var a = new Answer
+            {
+                Content = answerDto.Content,
+                CreateDate = DateTime.Now
+            };
+
+            return Ok(new
+            {
+                answer = _announcementRepository.AddAnswer(a, answerDto.QuestionId)
+            });
+        }
+
+        [HttpPost("DeleteAnswer/{id}")]
+        public IActionResult AnswerQuestion(int id)
+        {
+            _announcementRepository.DeleteAnswer(id);
+            return Ok(new
+            {
+                message = "success"
+            });
+        }
+
         [HttpGet("UserAnnouncements/{id}")]
         public IActionResult GetByOwnerId(int id)
         {
@@ -114,7 +173,7 @@ namespace PCPartsAppAPI.Controllers
             {
                 return BadRequest();
             }
-            
+        
         }
 
         [HttpPost("CloseAnnouncement/{id}")]

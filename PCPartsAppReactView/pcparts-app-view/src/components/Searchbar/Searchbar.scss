@@ -27,7 +27,7 @@
     width: 200px;
     height: 40px;
 
-    @media #{$mobile-sx} {
+    @media #{$mobile} {
       width: 100%;
       margin: 20px 0;
     }

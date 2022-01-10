@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PCPartsAppAPI.Models;
 using PCPartsAppDb.Context;
+using PCPartsAppDb.Helpers;
 using PCPartsAppDb.Models;
 using System;
 using System.Collections.Generic;
@@ -138,6 +139,12 @@ namespace PCPartsAppDb.Repos
             return _context.Categories.ToList();
         }
 
+        public List<QuestionHelper> GetQuestions(int id)
+        {
+            var results = _context.Questions.Where(x => x.AnnouncementId == id).Include(x=>x.Questioner);
+            var res = results.Select(y => new QuestionHelper{Question=y,Answer=_context.Answers.FirstOrDefault(x=>x.QuestionId==y.Id)}).ToList();
+            return res;
+        }
         public void AddPhoto(int id, List<string> paths)
         {
             var addPaths = new List<ImagePath>();
@@ -152,6 +159,45 @@ namespace PCPartsAppDb.Repos
             }
 
             _context.ImagePaths.AddRange(addPaths);
+            _context.SaveChanges();
+        }
+
+        public Question AddQuestion(Question question,int userId, int annId)
+        {
+            question.Announcement = _context.Announcements.FirstOrDefault(x => x.Id == annId);
+            var q = _context.Users.FirstOrDefault(x => x.Id == userId);
+            question.Questioner = q;
+            _context.Questions.Add(question);
+            _context.SaveChanges();
+            question.Id = _context.Questions.Where(x => x.AnnouncementId == annId).ToList().LastOrDefault().Id;
+
+
+            return question;
+        }
+
+        public void DeleteQuestion(int id)
+        {
+            var q = _context.Questions.FirstOrDefault(x => x.Id == id);
+            var ans = _context.Answers.Where(x => x.QuestionId == id).ToList();
+            _context.Answers.RemoveRange(ans);
+            _context.Questions.Remove(q);
+            _context.SaveChanges();
+        }
+
+        public Answer AddAnswer(Answer answer,int id)
+        {
+            var q = _context.Questions.FirstOrDefault(x => x.Id == id);
+            answer.Question = q;
+            _context.Answers.Add(answer);
+            answer.Id = _context.SaveChanges();
+
+            return answer;
+        }
+
+        public void DeleteAnswer(int id)
+        {
+            var q = _context.Answers.FirstOrDefault(x => x.Id == id);
+            _context.Answers.Remove(q);
             _context.SaveChanges();
         }
     }

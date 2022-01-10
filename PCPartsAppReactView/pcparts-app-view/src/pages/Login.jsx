@@ -21,7 +21,7 @@ const Login = (props) => {
                 password
             })
         }).then(res => {
-            console.log('response',res);
+
             return res.json();
         })
         .then(data => {

@@ -11,6 +11,10 @@ $header-height: 70px;
   h2 {
     margin: auto;
     font-size: 20px;
+
+    @media #{$mobile} {
+      text-align: center;
+    }
   }
 
   a {
@@ -99,6 +103,13 @@ $header-height: 70px;
    // @include gradient-background;
     //height: 5px;
   }
+
+  &_mobile-user {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 @import url('https://fonts.googleapis.com/css?family=Merriweather:900&display=swap');
@@ -110,8 +121,8 @@ $header-height: 70px;
   --nav-duration: calc(var(--duration) / 4);
   --ease: cubic-bezier(0.215, 0.61, 0.355, 1);
   --space: 1rem;
-  --font-primary: 'Helvetica', sans-serif;
-  --font-heading: 'Merriweather', serif;
+  --font-primary: 'Segoe UI';
+  --font-heading: 'Segoe UI';
   --font-size: 1.125rem;
   --line-height: 1.5;
 }

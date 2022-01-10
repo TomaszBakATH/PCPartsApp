@@ -27,7 +27,7 @@ const ProposedAnnouncements = () => {
     useEffect( ()=>{
         axios.get('https://localhost:44321/api/announcement/get/'+10)
             .then((response)=> {
-                console.log("pros",response.data.announcements)
+
                 setAnnouncements(response.data.announcements);
             })
             .catch(function (error) {
@@ -36,7 +36,7 @@ const ProposedAnnouncements = () => {
     },[])
 
     const x = () => {
-        console.log(announcements);
+
     }
 
     return (

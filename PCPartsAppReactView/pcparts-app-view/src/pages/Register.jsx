@@ -27,7 +27,7 @@ const Register = () => {
         formData.append('image',image)
         formData.append('city',city)
         formData.append('birthdate',dateFormat(birthdate, "yyyy-mm-dd")+"T00:00:00")
-        console.log('aasfd',formData)
+
 
         axios
             .post("https://localhost:44321/api/auth/register", formData)

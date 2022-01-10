@@ -13,7 +13,7 @@ const AnnouncementTile = (props) => {
         if(id){
             setPath("/announcement/"+id.toString());
         }
-        console.log("id",id)
+
     },[id])
 
     const x = () => {

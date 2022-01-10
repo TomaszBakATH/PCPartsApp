@@ -9,6 +9,7 @@ import AnnouncementSpecs from "../components/AnnouncementSpecs/AnnouncementSpecs
 import AnnouncementProduct from "../components/AnnouncementProduct/AnnouncementProduct";
 import ProposedAnnouncements from "../components/ProposedAnnouncements/ProposedAnnouncements";
 import ClosedModal from "../components/ClosedModal/ClosedModal";
+import AnnouncementQASection from "../components/AnnouncementQASection/AnnouncementQASection";
 
 const AnnouncementPage = (props) => {
 
@@ -33,7 +34,7 @@ const AnnouncementPage = (props) => {
         axios.get('https://localhost:44321/api/announcement/announcement/'+props.id.toString())
             .then((response)=> {
                 initialData = response.data.announcement
-                console.log(initialData)
+
                 setAnnouncementData(initialData);
             })
             .catch(function (error) {
@@ -48,6 +49,7 @@ const AnnouncementPage = (props) => {
             {announcementData.product.map(({name,category,params})=>{
                return <AnnouncementProduct name={name} category={category} params={params} />
             })}
+            <AnnouncementQASection ownerId={announcementData.ownerId} announcementId={props.id} id={props.name}/>
             <ProposedAnnouncements />
         </div>
     )

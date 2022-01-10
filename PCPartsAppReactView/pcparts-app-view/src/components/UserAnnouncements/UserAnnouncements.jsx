@@ -12,7 +12,7 @@ const UserAnnouncements = (props) => {
     const {announcements} = props;
     return (
         <div className='user-announcements'>
-            <h2>Ogłoszenia urzytownika</h2>
+            <h2>Ogłoszenia użytownika</h2>
             <label>Pokaż zakończone</label>
             <input type='checkbox' onClick={()=>{setShowClosed(!showClosed)}}/>
             <div className='user-announcements_wrapper'>

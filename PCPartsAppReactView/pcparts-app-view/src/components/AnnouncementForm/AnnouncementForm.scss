@@ -1,6 +1,11 @@
+@import 'src/styles/variables';
+
 .announcement-form{
   padding: 50px 100px;
-  min-height: 1000px;
+  min-height: 200px;
+  max-width: 750px;
+  box-shadow:  $dark-orange 20px 20px, $dark-gray -20px -20px;
+  margin:100px auto 400px;
 
   &_parts-wrapper{
     box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;

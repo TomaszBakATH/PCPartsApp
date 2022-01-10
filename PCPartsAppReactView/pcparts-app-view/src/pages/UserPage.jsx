@@ -21,7 +21,7 @@ const UserPage = (props) => {
         axios.get('https://localhost:44321/api/announcement/GetUser/'+props.id.toString())
             .then((response)=> {
                 initialData = response.data.user
-                console.log(initialData)
+
                 setUserData(initialData);
             })
             .catch(function (error) {

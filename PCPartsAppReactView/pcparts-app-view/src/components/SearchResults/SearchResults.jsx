@@ -39,7 +39,6 @@ const SearchResults = () => {
         let minPrice =  parseInt(url.get("minPrice"), 10)?parseInt(url.get("minPrice"), 10):0
         let isSet = url.get("isSet")=="on"?true:false
 
-        console.log("preserch", querry,city,category,maxPrice,url.get("minPrice"),isSet)
         axios.post("https://localhost:44321/api/announcement/Search",
             {
                 querry,
@@ -51,7 +50,6 @@ const SearchResults = () => {
             })
             .then(function (response) {
                 setAnnouncements(response.data.announcements);
-                console.log("search",response.data.announcements);
             })
             .catch(function (error) {
                 // handle error
@@ -62,7 +60,7 @@ const SearchResults = () => {
 
     return (
         <div className='search-results'>
-            <h2>Wyniki wyszukiwania</h2>
+            <h2 className='search-results_text'>Wyniki wyszukiwania</h2>
             <div className='search-results_wrapper'>
                 {announcements.length>0?announcements.map(({title,addDate,imagePath,id})=>{
                     return <AnnouncementTile search={true} title={title} addDate={addDate} imagePath={imagePath} id={id}/>

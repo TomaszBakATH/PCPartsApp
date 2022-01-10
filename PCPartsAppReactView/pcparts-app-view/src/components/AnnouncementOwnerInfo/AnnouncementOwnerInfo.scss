@@ -8,7 +8,7 @@
   width: 450px;
   flex-shrink: 0;
   overflow: hidden;
-  overflow-y: scroll;
+  //overflow-y: scroll;
   position: relative;
 
   @media #{$mobile} {

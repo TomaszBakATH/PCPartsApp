@@ -20,7 +20,7 @@ const AnnouncementOwnerInfo = (props) => {
     const x = () => {
       axios.post("https://localhost:44321/api/announcement/CloseAnnouncement/" + announcementId.toString())
           .then(function (response) {
-              console.log("dwel",response.data);
+
           })
           .catch(function (error) {
               // handle error

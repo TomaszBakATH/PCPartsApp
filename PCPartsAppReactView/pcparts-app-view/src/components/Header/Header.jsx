@@ -58,6 +58,67 @@ const Header = (props) => {
         )
     }
 
+    let mobileMenu;
+
+    if (name === '' || name === undefined) {
+        mobileMenu = (
+           <ul>
+               <li>
+                   <Link to='/#'>
+                       <div className='header_logo-container'>
+                           <h2>PC PARTS</h2>
+                       </div>
+                   </Link>
+               </li>
+               <li>
+                   <Link to='/login' onClick={logout}>
+                       <h2>Login</h2>
+                   </Link>
+               </li>
+               <li>
+                   <Link to='/register'>
+                       <h2>Rejstracja</h2>
+                   </Link>
+               </li>
+           </ul>
+        )
+    } else {
+        mobileMenu = (
+            <ul>
+                <li>
+                    <Link to='/#'>
+                        <div className='header_logo-container'>
+                            <h2>PC PARTS</h2>
+                        </div>
+                    </Link>
+                </li>
+                <li>
+                    <Link to="#0">
+                    <div className='header_mobile-user'>
+                        {
+                            image
+                                ?<img className='announcement-owner-info_user-image' src={"https://localhost:44321/images/"+image}/>
+                                :<img className='announcement-owner-info_user-image' src={process.env.PUBLIC_URL + '/user-unknown.png'}/>
+                        }
+                        <h2>Witaj {nickname}!</h2>
+                    </div>
+                </Link>
+                </li>
+                <li>
+                    <Link to='/new-announcement'>
+                        <h2>Dodaj Ogłoszenie</h2>
+                    </Link>
+                </li>
+                <li>
+                    <Link to='/#' onClick={logout}>
+                        <h2>Wyloguj</h2>
+                </Link>
+                </li>
+
+            </ul>
+        )
+    }
+
     return (
         <div className='header'>
             <div className='header_nav'>
@@ -95,12 +156,7 @@ const Header = (props) => {
             </label>
 
             <nav className="main-navigation">
-                <ul>
-                    <li><a href="#0">Home</a></li>
-                    <li><a href="#0">About</a></li>
-                    <li><a href="#0">Contact</a></li>
-                    <li><a href="#0">Dance</a></li>
-                </ul>
+                {mobileMenu}
             </nav>
         </div>
     );

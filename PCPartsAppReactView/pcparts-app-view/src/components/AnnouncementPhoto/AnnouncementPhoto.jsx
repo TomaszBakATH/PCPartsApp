@@ -22,7 +22,7 @@ const AnnouncementPhoto = (props) => {
                 <Carousel  infiniteLoop={true} thumbWidth={50} swipeable={true} >
                     {images.length>0?
                         images.map(({path})=>{
-                            console.log(path)
+
                             return(
                                 <div className='announcement-photo_image-wrapper'>
                                     <img className='announcement-photo_image' src={"https://localhost:44321/images/"+path}/>

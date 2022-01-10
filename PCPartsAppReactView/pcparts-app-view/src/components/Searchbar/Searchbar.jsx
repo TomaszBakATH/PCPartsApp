@@ -23,7 +23,6 @@ const Searchbar = () => {
     useEffect( ()=>{
         axios.get('https://localhost:44321/api/announcement/GetCategories')
             .then((response)=> {
-                console.log("cats",response.data.categories)
                 response.data.categories.forEach(({id,name})=>{
                     options.push({value:id,label:name});
                 })
