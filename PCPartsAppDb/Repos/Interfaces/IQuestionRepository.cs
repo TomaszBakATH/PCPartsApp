@@ -1,4 +1,5 @@
 ﻿using PCPartsAppAPI.Models;
+using PCPartsAppDb.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,8 @@ namespace PCPartsAppDb.Repos
 {
     public interface IQuestionRepository
     {
-        Question GetQuestionById(int id);
-        Question GetQuestionByAnnouncementId(int id);
-        Question AddQuestion(Question question);
-        bool EditQuestion(Question question);
+        public List<QuestionHelper> GetQuestions(int id);
+        public Question AddQuestion(Question question, int userId, int annId);
         void DeleteQuestion(int id);
     }
 }

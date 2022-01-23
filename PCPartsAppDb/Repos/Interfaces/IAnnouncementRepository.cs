@@ -16,11 +16,6 @@ namespace PCPartsAppDb.Repos
         List<Announcement> GetAnnouncementsByOwnerId(int id);
         List<Announcement> SearchAnnouncements(string querry, bool isSet, string category, double maxPrice, string city, double minPrice = 0);
         List<Announcement> GetAnnouncements(int ammount);
-        List<QuestionHelper> GetQuestions(int id);
-        Question AddQuestion(Question question, int userId, int annId);
-        void DeleteQuestion(int id);
-        Answer AddAnswer(Answer answer, int id);
-        void DeleteAnswer(int id);
         void AddPhoto(int id, List<string> paths);
         Announcement AddAnnouncement(Announcement announcement);
         Announcement EditAnnouncement(Announcement announcement);

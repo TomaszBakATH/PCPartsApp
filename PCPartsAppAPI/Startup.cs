@@ -36,6 +36,8 @@ namespace PCPartsAppAPI
             services.AddControllers();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IAnnouncementRepository, AnnouncementRepository>();
+            services.AddScoped<IQuestionRepository, QuestionRepository>();
+            services.AddScoped<IAnswerRepository, AnswerRepository>();
             services.AddScoped<JwtService>();
             services.AddControllersWithViews()
                 .AddNewtonsoftJson(options =>

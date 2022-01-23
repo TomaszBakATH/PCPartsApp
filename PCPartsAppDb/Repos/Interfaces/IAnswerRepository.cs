@@ -9,10 +9,7 @@ namespace PCPartsAppDb.Repos
 {
     public interface IAnswerRepository
     {
-        Answer GetAnswerById(int id);
-        Answer GetAnswerByQuestion(int id);
-        Answer AddAnswer(Answer answer);
-        Answer EditAnswer(Answer answer);
+        Answer AddAnswer(Answer answer, int id);
         void DeleteAnswer(int id);
     }
 }

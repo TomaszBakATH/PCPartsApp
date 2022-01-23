@@ -5,16 +5,6 @@ using System.Threading.Tasks;
 
 namespace PCPartsAppAPI.Models
 {
-    //public enum Category
-    //{
-    //    Procesor,
-    //    Motherboard,
-    //    Case,
-    //    RAM,
-    //    Disc,
-    //    Cooling,
-    //    PowerSupply,
-    //}
     public class Product
     {
         public int Id { get; set; }

@@ -15,8 +15,10 @@ namespace PCPartsAppDb.Repos
         {
             _context = context;
         }
-        public Answer AddAnswer(Answer answer)
+        public Answer AddAnswer(Answer answer, int id)
         {
+            var q = _context.Questions.FirstOrDefault(x => x.Id == id);
+            answer.Question = q;
             _context.Answers.Add(answer);
             answer.Id = _context.SaveChanges();
 
@@ -25,36 +27,9 @@ namespace PCPartsAppDb.Repos
 
         public void DeleteAnswer(int id)
         {
-            try
-            {
-                var entity = _context.Answers.FirstOrDefault(x => x.Id == id);
-                _context.Answers.Remove(entity);
-            }
-            catch (Exception)
-            {}
-        }
-
-        public Answer EditAnswer(Answer answer)
-        {
-            var entity = _context.Answers.FirstOrDefault(x => x.Id == answer.Id);
-            if(entity != null)
-            {
-                entity = answer;
-                _context.SaveChanges();
-
-                return answer;
-            }
-            return null;
-        }
-
-        public Answer GetAnswerById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Answer GetAnswerByQuestion(int id)
-        {
-            throw new NotImplementedException();
+            var q = _context.Answers.FirstOrDefault(x => x.Id == id);
+            _context.Answers.Remove(q);
+            _context.SaveChanges();
         }
     }
 }

@@ -22,17 +22,23 @@ namespace PCPartsAppAPI.Controllers
     {
         private readonly PcPartsContext _context;
         private readonly IAnnouncementRepository _announcementRepository;
+        private readonly IQuestionRepository _questionRepository;
         private readonly IUserRepository _userRepository;
+        private readonly IAnswerRepository _answerRepository;
         private readonly JwtService _jwtService;
         private readonly IWebHostEnvironment _hostEnvironment;
 
         public AnnouncementController(
+            IAnswerRepository answerRepository,
+            IQuestionRepository questionRepository,
             PcPartsContext context,
             IAnnouncementRepository announcementRepository,
             IUserRepository userRepository,
             JwtService jwtService,
             IWebHostEnvironment hostEnvironment)
         {
+            _answerRepository = answerRepository;
+            _questionRepository = questionRepository;
             _context = context;
             _announcementRepository = announcementRepository;
             _jwtService = jwtService;
@@ -67,7 +73,7 @@ namespace PCPartsAppAPI.Controllers
         {
             return Ok(new
             {
-                questions = _announcementRepository.GetQuestions(id)
+                questions = _questionRepository.GetQuestions(id)
             });
         }
 
@@ -82,14 +88,14 @@ namespace PCPartsAppAPI.Controllers
 
             return Ok(new
             {
-                question = _announcementRepository.AddQuestion(q,questionDto.QuestionerId,questionDto.AnnouncementId)
+                question = _questionRepository.AddQuestion(q,questionDto.QuestionerId,questionDto.AnnouncementId)
             });
         }
 
         [HttpPost("DeleteQuestion/{id}")]
         public IActionResult DeleteQuestion(int id )
         {
-            _announcementRepository.DeleteQuestion(id);
+            _questionRepository.DeleteQuestion(id);
             return Ok(new
             {
                 message = "success"
@@ -107,14 +113,14 @@ namespace PCPartsAppAPI.Controllers
 
             return Ok(new
             {
-                answer = _announcementRepository.AddAnswer(a, answerDto.QuestionId)
+                answer = _answerRepository.AddAnswer(a, answerDto.QuestionId)
             });
         }
 
         [HttpPost("DeleteAnswer/{id}")]
         public IActionResult AnswerQuestion(int id)
         {
-            _announcementRepository.DeleteAnswer(id);
+            _answerRepository.DeleteAnswer(id);
             return Ok(new
             {
                 message = "success"
