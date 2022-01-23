@@ -62,8 +62,8 @@ const SearchResults = () => {
         <div className='search-results'>
             <h2 className='search-results_text'>Wyniki wyszukiwania</h2>
             <div className='search-results_wrapper'>
-                {announcements.length>0?announcements.map(({title,addDate,imagePath,id})=>{
-                    return <AnnouncementTile search={true} title={title} addDate={addDate} imagePath={imagePath} id={id}/>
+                {announcements.length>0?announcements.map(({title,addDate,imagePath,id,price})=>{
+                    return <AnnouncementTile search={true} title={title} addDate={addDate} imagePath={imagePath} id={id} price={price}/>
                 })
                     :<h2>Brak wyników</h2>
                 }

@@ -25,7 +25,7 @@ const CategoryList = () => {
       if(index % 2 === 0){
           return "category-tile";
       }else{
-          return "category-tile category-tile_reversed";
+          return "category-tile";
       }
     }
 
@@ -33,8 +33,8 @@ const CategoryList = () => {
         <div className='category-list'>
             <h2>Kategorie</h2>
             <div className='category-list_wrapper'>
-                {categories.map(({name}, index)=>{
-                   return <CategoryTile name={name} reversed={x(index)}/>
+                {categories.map(({name,imagePath}, index)=>{
+                   return <CategoryTile name={name} reversed={x(index)} image={imagePath}/>
                 })}
             </div>
         </div>

@@ -12,7 +12,8 @@ const ProposedAnnouncements = () => {
         description: "",
         id: 0,
         imagePath: [],
-        title:"sample titile"
+        title:"sample titile",
+        price:''
     }
 
     const initialArray = [
@@ -43,8 +44,8 @@ const ProposedAnnouncements = () => {
         <div className='proposed-announcements' onClick={x}>
             <h2>Proponawanie dla ciebie</h2>
             <div className='proposed-announcements_wrapper'>
-                {announcements.map(({title,addDate,imagePath,id})=>{
-                    return <AnnouncementTile title={title} addDate={addDate} imagePath={imagePath} id={id}/>
+                {announcements.map(({title,addDate,imagePath,id,price})=>{
+                    return <AnnouncementTile title={title} addDate={addDate} imagePath={imagePath} id={id} price={price}/>
                 })}
             </div>
         </div>

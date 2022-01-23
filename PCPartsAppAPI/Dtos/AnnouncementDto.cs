@@ -15,6 +15,7 @@ namespace PCPartsAppAPI.Dtos
         public string Description { get; set; }
         public int OwnerId { get; set; }
         public virtual User Owner { get; set; }
+        public string Price { get; set; }
         public IEnumerable<Question> Questions { get; set; }
         public DateTime AddDate { get; set; }
         public int StatusId { get; set; }

@@ -25,7 +25,8 @@ const AnnouncementPage = (props) => {
         id:0,
         description:'',
         closeDate:null,
-        addDate:''
+        addDate:'',
+        price:'100zł'
     }
 
     const [announcementData, setAnnouncementData] = useState(initialData)
@@ -45,7 +46,7 @@ const AnnouncementPage = (props) => {
     return (
         <div>
             {announcementData.statusId==2?<ClosedModal />:<></>}
-            <AnnouncementTopSection announcementId={props.id} name={props.name} images={announcementData.imagePath} owner={announcementData.owner} info={{title:announcementData.title ,description: announcementData.description }}/>
+            <AnnouncementTopSection announcementId={props.id} name={props.name} images={announcementData.imagePath} owner={announcementData.owner} info={{title:announcementData.title ,description: announcementData.description,price: announcementData.price }}/>
             {announcementData.product.map(({name,category,params})=>{
                return <AnnouncementProduct name={name} category={category} params={params} />
             })}

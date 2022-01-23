@@ -16,17 +16,17 @@ const UserAnnouncements = (props) => {
             <label>Pokaż zakończone</label>
             <input type='checkbox' onClick={()=>{setShowClosed(!showClosed)}}/>
             <div className='user-announcements_wrapper'>
-            {announcements.map(({addDate, description, id, imagePath, title, statusId})=>{
+            {announcements.map(({addDate, description, id, imagePath, title, statusId,price})=>{
 
                     if(showClosed){
                         return (
                             statusId==2
-                                ?<AnnouncementTile addDate={addDate} description={description} id={id} imagePath={imagePath} title={title} search={true}/>
+                                ?<AnnouncementTile addDate={addDate} description={description} id={id} imagePath={imagePath} title={title} search={true} price={price}/>
                                 :<></>
                         )
                     }else {
                         return (
-                            <AnnouncementTile addDate={addDate} description={description} id={id} imagePath={imagePath} title={title} search={true}/>
+                            <AnnouncementTile addDate={addDate} description={description} id={id} imagePath={imagePath} title={title} search={true} price={price}/>
                         )
                     }
             })}

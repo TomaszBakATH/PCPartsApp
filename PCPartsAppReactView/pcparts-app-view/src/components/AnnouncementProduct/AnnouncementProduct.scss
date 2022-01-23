@@ -5,6 +5,10 @@
   padding: 50px 100px;
   max-width: 1700px;
 
+  @media #{$mobile} {
+    padding: 50px;
+  }
+
   hr {
     color: $base-gray;
     height: 2px;

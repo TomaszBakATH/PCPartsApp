@@ -19,10 +19,18 @@ namespace PCPartsAppDb.Repos
         }
         public User Create(User user)
         {
-            _context.Users.Add(user);
-            user.Id = _context.SaveChanges();
+            if(_context.Users.FirstOrDefault(x=>x.Email==user.Email)==null)
+            {
+                _context.Users.Add(user);
+                user.Id = _context.SaveChanges();
+                return user;
+            }else
+            {
+                return null;
+            }
+            
 
-            return user;
+            
         }
 
         public User GetByEmail(string email)

@@ -10,8 +10,8 @@ const UserInfo = (props) => {
     const [showEmail,setShowEmail] = useState(false);
     const [showNumber,setShowNumber] = useState(false);
 
-    const {city,email,imagePath,joinDate, nickname,} = props;
-    const number = 213321;
+    const {city,email,imagePath,joinDate, nickname,number} = props;
+    //const number = 213321;
 
     return (
         <div className='user-info'>

@@ -19,12 +19,15 @@ namespace PCPartsAppAPI.Controllers
     public class AuthController : Controller
     {
 
-        private static PcPartsContext _context;
+        private readonly PcPartsContext _context;
         private readonly IUserRepository _userRepository;
         private readonly JwtService _jwtService;
         private readonly IWebHostEnvironment _hostEnvironment;
 
-        public AuthController(PcPartsContext context, IUserRepository userRepository, JwtService jwtService, IWebHostEnvironment hostEnvironment)
+        public AuthController(PcPartsContext context,
+            IUserRepository userRepository,
+            JwtService jwtService,
+            IWebHostEnvironment hostEnvironment)
         {
             _context = context;
             _userRepository = userRepository;
@@ -44,10 +47,19 @@ namespace PCPartsAppAPI.Controllers
                 Nickname = dto.Nickname,
                 Birthdate = DateTime.Now,
                 Password = BCrypt.Net.BCrypt.HashPassword(dto.Password),
-                ImagePath = await SaveImage(dto.Image)
+                ImagePath = await SaveImage(dto.Image),
+                PhoneNumber = dto.PhoneNumber
             };
+            var createdUser = _userRepository.Create(user);
 
-            return Created("success", _userRepository.Create(user));
+            if (createdUser != null)
+            {
+                return Created("success", createdUser);
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         [HttpPost("login")]
@@ -124,15 +136,20 @@ namespace PCPartsAppAPI.Controllers
         }
         public async Task<string> SaveImage(IFormFile imageFile)
         {
-            string imageName = new String(Path.GetFileNameWithoutExtension(imageFile.FileName).Take(10).ToArray()).Replace(' ', '-');
-            imageName += DateTime.Now.ToString("yymssfff") + Path.GetExtension(imageFile.FileName);
-            var imagePath = Path.Combine(_hostEnvironment.ContentRootPath, "Images", imageName);
-
-            using (var fileStream = new FileStream(imagePath, FileMode.Create))
+            if(imageFile!=null)
             {
-                await imageFile.CopyToAsync(fileStream);
+                string imageName = new String(Path.GetFileNameWithoutExtension(imageFile.FileName).Take(10).ToArray()).Replace(' ', '-');
+                imageName += DateTime.Now.ToString("yymssfff") + Path.GetExtension(imageFile.FileName);
+                var imagePath = Path.Combine(_hostEnvironment.ContentRootPath, "Images", imageName);
+
+                using (var fileStream = new FileStream(imagePath, FileMode.Create))
+                {
+                    await imageFile.CopyToAsync(fileStream);
+                }
+                return imageName;
             }
-            return imageName;
+            return "";
+            
         }
     }
 }

@@ -29,6 +29,7 @@ const AnnouncementForm = (props) => {
     const [images, setImages] = useState([])
     const [parts, setParts] = useState([])
     const [title, setTitle] = useState('');
+    const [price, setPrice] = useState('');
     const [announcementId, setAnnouncementId] = useState();
     const [description, setDescription] = useState('');
 
@@ -52,6 +53,7 @@ const AnnouncementForm = (props) => {
                 {
                     title,
                     description,
+                    price,
                     ownerId:props.id,
                     product:parts,
                 })
@@ -129,6 +131,11 @@ const AnnouncementForm = (props) => {
                     <input type="text" className="form-control" onChange={e => setDescription(e.target.value)}/>
                     <label htmlFor="floatingInput">Opis ogłoszenia</label>
                 </div>
+
+                <div className="form-floating">
+                    <input type="text" className="form-control" onChange={e => setPrice(e.target.value)}/>
+                    <label htmlFor="floatingInput">Cena</label>
+                </div>
                 <div className='announcement-form_parts-wrapper'>
                     {
                         parts.map(({params}, index) => {
@@ -136,7 +143,7 @@ const AnnouncementForm = (props) => {
                             return <div>
                                 <div className="form-floating">
                                     <input type="text" className="form-control" onChange={e => addPart(index,e.target.value,null)}/>
-                                    <label htmlFor="floatingInput">nazwa</label>
+                                    <label htmlFor="floatingInput">nazwa części</label>
                                 </div>
                                 <div className="form-floating">
                                     <Dropdown options={options} onChange={(e)=>addCategory(e,index)} value={options[0]} placeholder="Kategoria" />
@@ -146,7 +153,7 @@ const AnnouncementForm = (props) => {
                                         params.map((_,index)=>{
                                             return <div>
                                                 <div className="form-floating">
-                                                    <p >nazwa</p>
+                                                    <p >nazwa parametru</p>
                                                     <input type="text" className="form-control"
                                                            onChange={event => addParam(partIndex,index,event.target.value,null)}/>
                                                     <p>wartość</p>
@@ -166,13 +173,16 @@ const AnnouncementForm = (props) => {
                     <button className='btn' onClick={createPart}>dodaj część</button>
                 </div>
                 <div className="form-floating">
+                    <br/>
+                    <p>Zdjęcia</p>
+                    <br/>
                     <input multiple type="file" accept="image/*" className="form-control-file"
                            onChange={e => {setImages(e.target.files);
                                }}/>
                 </div>
 
 
-                <button className="w-100 btn btn-lg btn-dark" type="submit" onClick={submit}>Submit</button>
+                <button className="w-100 btn btn-lg btn-dark" type="submit" onClick={submit}>Zatwierdź</button>
 
             </form>
         </div>

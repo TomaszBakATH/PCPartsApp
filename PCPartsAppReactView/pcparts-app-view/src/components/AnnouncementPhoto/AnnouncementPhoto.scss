@@ -2,12 +2,17 @@
 
 .announcement-photo {
 
+  .carousel-status {
+    display: none;
+  }
+
   justify-content: center;
   //width: 75%;
   padding: 20px;
 
   &--mobile {
     display: none;
+
     @media #{$mobile} {
       display: flex;
     }

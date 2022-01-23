@@ -6,7 +6,7 @@ import axios from "axios";
 
 const CategoryTile = (props) => {
 
-    const {name, reversed} = props;
+    const {name, reversed,image} = props;
 
     let navigate = useNavigate();
     const x = () => {
@@ -15,7 +15,11 @@ const CategoryTile = (props) => {
 
     return (
         <div className={reversed} onClick={x}>
-            <img className='category-tile_image' src={process.env.PUBLIC_URL + '/homepage-background.jpg'}/>
+            {
+                image
+                    ?<img className='category-tile_image' src={"https://localhost:44321/images/"+image}/>
+                    :<img className='category-tile_image' src={process.env.PUBLIC_URL + '/homepage-background.png'}/>
+            }
             <h3>{name}</h3>
         </div>
     )

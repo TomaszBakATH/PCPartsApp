@@ -52,7 +52,7 @@ const Searchbar = () => {
                 <div className="form-floating">
                     <Dropdown options={options} onChange={(e)=>setCategory(e.label)} value={options[0]} placeholder="Kategoria" />
                 </div>
-                <button onClick={x}>Szukaj</button>
+                <button onClick={x} className='btn btn-dark'>Szukaj</button>
             </div>
         </div>
     )

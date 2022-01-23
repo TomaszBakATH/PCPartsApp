@@ -21,7 +21,13 @@ const AnnouncementQATile = (props) => {
         console.log("q",question)
         console.log("s",answerState)
         setAnswerState(answer)
-    }, [])
+        console.log("effect",answer, answerState)
+    }, [answer])
+
+    const x = () => {
+        console.log("answer", answer)
+        console.log("question", question)
+    }
 
     const addAnswer = () => {
         axios.post('https://localhost:44321/api/announcement/AddAnswer/',
@@ -39,6 +45,7 @@ const AnnouncementQATile = (props) => {
     }
 
     const deleteAnswer = (answerId) => {
+        console.log("deletingAnswer", answerId.toString())
       setAnswerState(null)
         axios.post('https://localhost:44321/api/announcement/DeleteAnswer/'+answerId.toString())
             .then((response) => {
@@ -59,15 +66,15 @@ const AnnouncementQATile = (props) => {
     }
 
     const answerGet = () => {
-        if (answerState && ownerId === id) {
+        if (answerState && ownerId === id ) {
             const {id: answerId, content: answerContent, createDate: answerCreateDate} = answerState;
-
+            console.log('state',answerState)
             return (<div>
                 <h5>{answerContent}</h5>
                 <h5>{dateFormat(answerCreateDate, "dd.mm.yyyy").toString()}</h5>
                 <button className='btn btn-secondary' onClick={()=>{deleteAnswer(answerId)}}>Usuń</button>
             </div>)
-        } else if (answerState) {
+        } else if (answerState ) {
             const {id: answerId, content: answerContent, createDate: answerCreateDate} = answerState;
             return (<div>
                 <h5>{answerContent}</h5>
@@ -98,7 +105,7 @@ const AnnouncementQATile = (props) => {
                                 :
                                 <img className='header_user-image' src={process.env.PUBLIC_URL + '/user-unknown.png'}/>
                         }
-                        <h4>{nickname}</h4>
+                        <h4 onClick={x}>{nickname}</h4>
                     </div>
                     <div>
                         <h5>{dateFormat(createDate, "dd.mm.yyyy").toString()}</h5>

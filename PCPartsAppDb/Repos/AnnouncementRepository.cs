@@ -108,9 +108,10 @@ namespace PCPartsAppDb.Repos
             {
                 result = result.Where(x => x.Owner.City.ToLower()==city.ToLower());
             }
+
             //if (maxPrice > 0)
             //{
-            //    result = result.Where(x => x.Price < maxPrice && x.OwnerId > minPrice);
+            //    result = result.Where(x => x.Price < maxPrice && x.Price > minPrice);
             //}
             //else
             //{

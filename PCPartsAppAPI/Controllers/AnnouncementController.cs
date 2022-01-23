@@ -20,7 +20,7 @@ namespace PCPartsAppAPI.Controllers
     [ApiController]
     public class AnnouncementController : Controller
     {
-        private static PcPartsContext _context;
+        private readonly PcPartsContext _context;
         private readonly IAnnouncementRepository _announcementRepository;
         private readonly IUserRepository _userRepository;
         private readonly JwtService _jwtService;
@@ -144,7 +144,8 @@ namespace PCPartsAppAPI.Controllers
                     OwnerId = user.Id,
                     Product = announcementDto.Product,
                     Status = _context.Statuses.FirstOrDefault(x => x.Name == Statuses.Open.ToString()),
-                    Title = announcementDto.Title
+                    Title = announcementDto.Title,
+                    Price = announcementDto.Price
                 };
                
                 

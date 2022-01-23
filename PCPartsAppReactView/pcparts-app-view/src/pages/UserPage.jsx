@@ -31,7 +31,7 @@ const UserPage = (props) => {
 
     return (
         <div>
-            <UserInfo city={userData.city} email={userData.email} imagePath={userData.imagePath} joinDate={userData.joinDate} nickname={userData.nickname} />
+            <UserInfo city={userData.city} email={userData.email} imagePath={userData.imagePath} joinDate={userData.joinDate} nickname={userData.nickname} number={userData.phoneNumber}/>
             <UserAnnouncements announcements={userData.announcements}/>
         </div>
     )

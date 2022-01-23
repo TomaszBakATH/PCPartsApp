@@ -1,10 +1,11 @@
 import {Link, useNavigate} from "@reach/router";
 import "./Header.scss"
-import React from "react";
+import React, {useState} from "react";
 
 const Header = (props) => {
     const {name, setName,image,nickname} = props;
     let menu;
+    const [check,setCheck] = useState(false);
     const logout = async () => {
         await fetch('https://localhost:44321/api/auth/logout', {
             method: 'POST',
@@ -13,6 +14,10 @@ const Header = (props) => {
         });
 
         setName('');
+    }
+
+    const x = () => {
+        setCheck(!check);
     }
 
     if (name === '' || name === undefined) {
@@ -64,7 +69,7 @@ const Header = (props) => {
         mobileMenu = (
            <ul>
                <li>
-                   <Link to='/#'>
+                   <Link to='/#' onClick={x}>
                        <div className='header_logo-container'>
                            <h2>PC PARTS</h2>
                        </div>
@@ -76,7 +81,7 @@ const Header = (props) => {
                    </Link>
                </li>
                <li>
-                   <Link to='/register'>
+                   <Link to='/register' onClick={x}>
                        <h2>Rejstracja</h2>
                    </Link>
                </li>
@@ -86,14 +91,14 @@ const Header = (props) => {
         mobileMenu = (
             <ul>
                 <li>
-                    <Link to='/#'>
+                    <Link to='/#' onClick={x}>
                         <div className='header_logo-container'>
                             <h2>PC PARTS</h2>
                         </div>
                     </Link>
                 </li>
                 <li>
-                    <Link to="#0">
+                    <Link to={"/user/"+name.toString()} onClick={x}>
                     <div className='header_mobile-user'>
                         {
                             image
@@ -105,7 +110,7 @@ const Header = (props) => {
                 </Link>
                 </li>
                 <li>
-                    <Link to='/new-announcement'>
+                    <Link to='/new-announcement' onClick={x}>
                         <h2>Dodaj Ogłoszenie</h2>
                     </Link>
                 </li>
@@ -118,12 +123,14 @@ const Header = (props) => {
             </ul>
         )
     }
+    
+
 
     return (
         <div className='header'>
             <div className='header_nav'>
                 <Link to='/#'>
-                    <div className='header_logo-container'>
+                    <div className='header_logo-container' >
                         <h2>PC PARTS</h2>
                     </div>
                 </Link>
@@ -138,8 +145,8 @@ const Header = (props) => {
 
             </div>
 
-            <input id="page-nav-toggle" className="main-navigation-toggle" type="checkbox"/>
-            <label htmlFor="page-nav-toggle">
+            <input id="page-nav-toggle" className="main-navigation-toggle" type="checkbox" checked={check}/>
+            <label htmlFor="page-nav-toggle" onClick={x}>
                 <svg className="icon--menu-toggle" viewBox="0 0 60 30">
                     <g className="icon-group">
                         <g className="icon--menu">

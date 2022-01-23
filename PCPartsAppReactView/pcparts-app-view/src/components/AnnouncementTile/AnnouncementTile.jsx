@@ -5,7 +5,7 @@ import './AnnouncementTile.scss';
 
 const AnnouncementTile = (props) => {
 
-    const {addDate, description, id, imagePath, title,search} = props;
+    const {addDate, description, id, imagePath, title,search,price} = props;
     let navigate = useNavigate();
     const [path,setPath] = useState("/announcement/#")
 
@@ -25,7 +25,7 @@ const AnnouncementTile = (props) => {
       }
     }
 
-    const price = '100zł'
+    //const price = '100zł'
     return (
         <div className={x()} onClick={()=>{navigate(path)}}>
             {imagePath.length>0

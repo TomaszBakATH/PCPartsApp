@@ -12,10 +12,10 @@ const AnnouncementOwnerInfo = (props) => {
     const [showNumber,setShowNumber] = useState(false);
 
     const {owner,info,name,announcementId, images} = props;
-    const {title,description} = info;
-    const {city,email,imagePath,joinDate,nickname} = owner;
+    const {title,description,price} = info;
+    const {city,email,imagePath,joinDate,nickname,phoneNumber} = owner;
     const number = 213721377
-    const price = "100zł";
+    //const price = "100zł";
 
     const x = () => {
       axios.post("https://localhost:44321/api/announcement/CloseAnnouncement/" + announcementId.toString())
@@ -50,7 +50,7 @@ const AnnouncementOwnerInfo = (props) => {
             </div>
             </Link>
             <p className='announcement-owner-info_city'>Lokalizacja: {city}</p>
-            <div className='announcement-owner-info_button' onClick={()=>{setShowNumber(!showNumber)}}>{showNumber?number.toString():"Pokaż numer"}</div>
+            <div className='announcement-owner-info_button' onClick={()=>{setShowNumber(!showNumber)}}>{showNumber?phoneNumber.toString():"Pokaż numer"}</div>
             <div className='announcement-owner-info_button' onClick={()=>{setShowEmail(!showEmail)}}>{showEmail?email:"Pokaż E-mail"}</div>
             <AnnouncementPhoto images={images} mobile={true}/>
             <div className='announcement-owner-info_product-wrapper'>

@@ -45,10 +45,10 @@ const Login = (props) => {
             </div>
             <div className="form-floating">
                 <input type="password" className="form-control"  onChange={e=> setPassword(e.target.value)} required/>
-                <label htmlFor="floatingInput">Password</label>
+                <label htmlFor="floatingInput">Hasło</label>
             </div>
 
-            <button className="w-100 btn btn-lg btn-primary" type="submit" onClick={submit}>Submit</button>
+            <button className="w-100 btn btn-lg btn-primary" type="submit" onClick={submit}>Zaloguj</button>
 
         </form>
     )
