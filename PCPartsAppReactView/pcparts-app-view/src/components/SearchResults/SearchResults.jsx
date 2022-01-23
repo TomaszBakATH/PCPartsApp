@@ -14,7 +14,8 @@ const SearchResults = () => {
         description: "",
         id: 0,
         imagePath: [],
-        title:"sample titile"
+        title:"sample titile",
+        price: 100
     }
 
     const initialArray = [

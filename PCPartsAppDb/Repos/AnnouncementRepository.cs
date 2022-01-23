@@ -109,14 +109,14 @@ namespace PCPartsAppDb.Repos
                 result = result.Where(x => x.Owner.City.ToLower()==city.ToLower());
             }
 
-            //if (maxPrice > 0)
-            //{
-            //    result = result.Where(x => x.Price < maxPrice && x.Price > minPrice);
-            //}
-            //else
-            //{
-            //    result = result.Where(x => x.Price > minPrice);
-            //}
+            if (maxPrice > 0)
+            {
+                result = result.Where(x => x.Price < maxPrice && x.Price > minPrice);
+            }
+            else
+            {
+                result = result.Where(x => x.Price > minPrice);
+            }
 
             return result.ToList();
 

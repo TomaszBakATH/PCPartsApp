@@ -55,7 +55,7 @@ const AnnouncementOwnerInfo = (props) => {
             <AnnouncementPhoto images={images} mobile={true}/>
             <div className='announcement-owner-info_product-wrapper'>
                 <h1>{title}</h1>
-                <h2>{price}</h2>
+                <h2>{price.toString()+ "zł"}</h2>
                 <h5>{description}</h5>
             </div>
         </div>

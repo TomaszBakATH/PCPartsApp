@@ -110,6 +110,11 @@ $header-height: 70px;
     justify-content: center;
     align-items: center;
   }
+
+  &_mobile-logo {
+    display: flex !important;
+    justify-content: center;
+  }
 }
 
 @import url('https://fonts.googleapis.com/css?family=Merriweather:900&display=swap');

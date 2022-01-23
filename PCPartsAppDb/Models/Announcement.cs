@@ -19,7 +19,7 @@ namespace PCPartsAppAPI.Models
         public IEnumerable<Question> Questions { get; set; } = new List<Question>();
         public DateTime AddDate { get; set; }
         public DateTime? CloseDate { get; set; }
-        public string Price { get; set; }
+        public int Price { get; set; }
         public int StatusId { get; set; }
         public virtual Status Status { get; set; }
     }

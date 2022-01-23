@@ -12,3 +12,14 @@
     padding:25px;
   }
 }
+.alert {
+  border: 1px solid red;
+}
+
+.alert-text {
+  color: red;
+
+  &--disabled {
+    display: none;
+  }
+}

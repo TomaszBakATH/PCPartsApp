@@ -29,9 +29,11 @@ const AnnouncementForm = (props) => {
     const [images, setImages] = useState([])
     const [parts, setParts] = useState([])
     const [title, setTitle] = useState('');
-    const [price, setPrice] = useState('');
+    const [price, setPrice] = useState(-1);
     const [announcementId, setAnnouncementId] = useState();
     const [description, setDescription] = useState('');
+    const [inputValidated,setInputValidated] = useState('form-floating')
+    const [alertText,setAlertText] = useState('alert-text--disabled')
 
     useEffect( ()=>{
         axios.get('https://localhost:44321/api/announcement/GetCategories')
@@ -47,40 +49,53 @@ const AnnouncementForm = (props) => {
 
     const submit = async (e) => {
         e.preventDefault();
-        let indexx = 0;
-       await axios
-            .post("https://localhost:44321/api/announcement/AddAnnouncement",
-                {
-                    title,
-                    description,
-                    price,
-                    ownerId:props.id,
-                    product:parts,
+
+        if(title && description && price > -1) {
+
+
+            let indexx = 0;
+            await axios
+                .post("https://localhost:44321/api/announcement/AddAnnouncement",
+                    {
+                        title,
+                        description,
+                        price,
+                        ownerId: props.id,
+                        product: parts,
+                    })
+                .then(function (response) {
+                    // handle success
+
+                    //setAnnouncementId(response.data.announcement.id)
+                    indexx = response.data.announcement.product[0].announcementId;
+
+
+                    let formData = new FormData();
+                    formData.append('announcementId', indexx.toString())
+                    for (let i = 0; i < images.length; i++) {
+                        formData.append('imagePaths', images[i])
+                    }
+
+                    axios
+                        .post("https://localhost:44321/api/announcement/AddPhotos", formData)
+                        .then((res) => {
+                            navigate("/announcement/" + indexx.toString())
+                        }).catch((err) => alert("File Upload Error"));
                 })
-            .then(function (response) {
-                // handle success
-
-                //setAnnouncementId(response.data.announcement.id)
-                indexx = response.data.announcement.product[0].announcementId;
-
-
-                let formData = new FormData();
-                formData.append('announcementId',indexx.toString())
-                for (let i = 0; i < images.length; i++) {
-                    formData.append('imagePaths',images[i])
-                }
-
-                axios
-                    .post("https://localhost:44321/api/announcement/AddPhotos", formData)
-                    .then((res) => {
-                        navigate("/announcement/"+indexx.toString())
-                    }).catch((err) => alert("File Upload Error"));
-            })
-            .catch((err) => {
-                console.log("error",err)
-                alert("File Upload Error")
-            });
+                .catch((err) => {
+                    console.log("error", err)
+                    alert("File Upload Error")
+                });
+        }else{
+            validationAlert();
+        }
     }
+
+    const validationAlert = () => {
+      setInputValidated("form-floating alert")
+        setAlertText('alert-text')
+    }
+
     const createPart = (e) => {
         e.preventDefault();
         setParts([...parts, defaultPart])
@@ -119,21 +134,22 @@ const AnnouncementForm = (props) => {
 
     return (
         <div className='announcement-form'>
+            <h2 className={alertText}>wypełnij poprawnie wymagane pola</h2>
             <form>
                 <h1 className="h3 mb-3 fw-normal">Dodaj ogłoszenie</h1>
 
-                <div className="form-floating">
+                <div className={inputValidated}>
                     <input type="text" className="form-control" onChange={e => setTitle(e.target.value)}/>
                     <label htmlFor="floatingInput">Tytuł</label>
                 </div>
 
-                <div className="form-floating">
+                <div className={inputValidated}>
                     <input type="text" className="form-control" onChange={e => setDescription(e.target.value)}/>
                     <label htmlFor="floatingInput">Opis ogłoszenia</label>
                 </div>
 
-                <div className="form-floating">
-                    <input type="text" className="form-control" onChange={e => setPrice(e.target.value)}/>
+                <div className={inputValidated}>
+                    <input type="text" className="form-control" onChange={e => setPrice(parseInt(e.target.value))}/>
                     <label htmlFor="floatingInput">Cena</label>
                 </div>
                 <div className='announcement-form_parts-wrapper'>

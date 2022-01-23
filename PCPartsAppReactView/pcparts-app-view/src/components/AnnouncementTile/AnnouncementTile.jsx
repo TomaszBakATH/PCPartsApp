@@ -36,7 +36,7 @@ const AnnouncementTile = (props) => {
                 <h3>{title}</h3>
                 <div className='announcement-tile_date-wrapper'>
                     <h5>{addDate.substr(0,10)}</h5>
-                    <p>{price}</p>
+                    <p>{price.toString()+ "zł"}</p>
                 </div>
             </div>
         </div>

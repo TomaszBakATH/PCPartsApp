@@ -69,7 +69,7 @@ const Header = (props) => {
         mobileMenu = (
            <ul>
                <li>
-                   <Link to='/#' onClick={x}>
+                   <Link to='/#' onClick={x} className="header_mobile-logo">
                        <div className='header_logo-container'>
                            <h2>PC PARTS</h2>
                        </div>
@@ -91,7 +91,7 @@ const Header = (props) => {
         mobileMenu = (
             <ul>
                 <li>
-                    <Link to='/#' onClick={x}>
+                    <Link to='/#' onClick={x} className="header_mobile-logo">
                         <div className='header_logo-container'>
                             <h2>PC PARTS</h2>
                         </div>
